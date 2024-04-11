@@ -1,0 +1,14 @@
+C:\Users\Deyan\Documents\Coding\Visual Studio\C#WebBasic\MyWebServer\MyWebServer\bin\Debug\net8.0\MyWebServer.exe
+C:\Users\Deyan\Documents\Coding\Visual Studio\C#WebBasic\MyWebServer\MyWebServer\bin\Debug\net8.0\MyWebServer.deps.json
+C:\Users\Deyan\Documents\Coding\Visual Studio\C#WebBasic\MyWebServer\MyWebServer\bin\Debug\net8.0\MyWebServer.runtimeconfig.json
+C:\Users\Deyan\Documents\Coding\Visual Studio\C#WebBasic\MyWebServer\MyWebServer\bin\Debug\net8.0\MyWebServer.dll
+C:\Users\Deyan\Documents\Coding\Visual Studio\C#WebBasic\MyWebServer\MyWebServer\bin\Debug\net8.0\MyWebServer.pdb
+C:\Users\Deyan\Documents\Coding\Visual Studio\C#WebBasic\MyWebServer\MyWebServer\obj\Debug\net8.0\MyWebServer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Deyan\Documents\Coding\Visual Studio\C#WebBasic\MyWebServer\MyWebServer\obj\Debug\net8.0\MyWebServer.AssemblyInfoInputs.cache
+C:\Users\Deyan\Documents\Coding\Visual Studio\C#WebBasic\MyWebServer\MyWebServer\obj\Debug\net8.0\MyWebServer.AssemblyInfo.cs
+C:\Users\Deyan\Documents\Coding\Visual Studio\C#WebBasic\MyWebServer\MyWebServer\obj\Debug\net8.0\MyWebServer.csproj.CoreCompileInputs.cache
+C:\Users\Deyan\Documents\Coding\Visual Studio\C#WebBasic\MyWebServer\MyWebServer\obj\Debug\net8.0\MyWebServer.dll
+C:\Users\Deyan\Documents\Coding\Visual Studio\C#WebBasic\MyWebServer\MyWebServer\obj\Debug\net8.0\refint\MyWebServer.dll
+C:\Users\Deyan\Documents\Coding\Visual Studio\C#WebBasic\MyWebServer\MyWebServer\obj\Debug\net8.0\MyWebServer.pdb
+C:\Users\Deyan\Documents\Coding\Visual Studio\C#WebBasic\MyWebServer\MyWebServer\obj\Debug\net8.0\MyWebServer.genruntimeconfig.cache
+C:\Users\Deyan\Documents\Coding\Visual Studio\C#WebBasic\MyWebServer\MyWebServer\obj\Debug\net8.0\ref\MyWebServer.dll
