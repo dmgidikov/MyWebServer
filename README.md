@@ -1,4 +1,4 @@
-C# WebBasic
+<h1 align="center">C# WebBasic</h1>
 
 The purpose of this application is to show some basic concepts and patterns. It is developed for educational purposes and is used as demo in January 2022 C# Web Basics course in SoftUni. It has very basic functionality, but is used as showcase for the following patterns and concepts:
 
