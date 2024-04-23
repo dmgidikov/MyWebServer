@@ -1,26 +1,43 @@
 ﻿namespace MyWebServer
 {
-    using System;
     using System.Net;
-    using System.Net.Sockets;
     using System.Text;
+    using Server.HTTP;
+    using Server.Routing;
+    using System.Net.Sockets;
 
     public class HttpServer
     {
         private readonly IPAddress ipAddress;
         private readonly int port;
         private readonly TcpListener serverListener;
+        private readonly RoutingTable routingTable;
 
-        public HttpServer(IPAddress _address, int _port)
+        public HttpServer(string _address, int _port,
+            Action<IRoutingTable> _routingTableConfiguration)
         {
-            ipAddress = _address;
+            ipAddress = IPAddress.Parse(_address);
             port = _port;
 
             serverListener = new TcpListener(ipAddress, port);
+
+            _routingTableConfiguration(routingTable = new RoutingTable());
         }
 
-        public void Start()
-        {            
+        public HttpServer(int _port, Action<IRoutingTable> _routingTable)
+            : this("127.0.0.1", _port, _routingTable)
+        {
+
+        }
+
+        public HttpServer(Action<IRoutingTable> _routingTable)
+            : this(5555, _routingTable)
+        {
+
+        }
+
+        public async Task Start()
+        {
             serverListener.Start();
 
             Console.WriteLine($"Server is listening on port {port}");
@@ -28,33 +45,37 @@
 
             while (true)
             {
-                var connection = serverListener.AcceptTcpClient();
-                var networkStream = connection.GetStream();
+                var connection = await serverListener.AcceptTcpClientAsync();
 
-                var requestText = ReadRequest(networkStream);
-                Console.WriteLine(requestText);
+                _ = Task.Run(async () =>
+                {
+                    var networkStream = connection.GetStream();
 
-                WriteResponse(networkStream, "Hello from the server!");
+                    var requestText = await ReadRequest(networkStream);
+                    Console.WriteLine(requestText);
 
-                connection.Close();
+                    var request = Request.Parse(requestText);
+                    var response = routingTable.MatchRequest(request);
+
+                    if (response.PreRenderAction != null)
+                        response.PreRenderAction(request, response);
+
+                    AddSession(request, response);
+
+                    await WriteResponse(networkStream, response);
+
+                    connection.Close();
+                });
             }
         }
 
-        private void WriteResponse(NetworkStream networkStream, string content)
-        {            
-            var contentLength = Encoding.UTF8.GetByteCount(content);
-
-            var responseString = $@"HTTP/1.1 200 OK
-Content-type: text/plain; charset=UTF-8
-Content-Length: {contentLength}
-
-{content}";
-
-            var responseBytes = Encoding.UTF8.GetBytes(responseString);
-            networkStream.Write(responseBytes);
+        private async Task WriteResponse(NetworkStream networkStream, Response response)
+        {
+            var responseBytes = Encoding.UTF8.GetBytes(response.ToString());
+            await networkStream.WriteAsync(responseBytes);
         }
 
-        private string ReadRequest(NetworkStream networkStream)
+        private async Task<string> ReadRequest(NetworkStream networkStream)
         {
             var bufferLenght = 1024;
             var buffer = new byte[bufferLenght];
@@ -65,7 +86,7 @@ Content-Length: {contentLength}
 
             do
             {
-                var bytesRead = networkStream.Read(buffer, 0, bufferLenght);
+                var bytesRead = await networkStream.ReadAsync(buffer, 0, bufferLenght);
 
                 totalBytes += bytesRead;
 
@@ -78,7 +99,18 @@ Content-Length: {contentLength}
             }
             while (networkStream.DataAvailable);
 
-            return requestBuilder.ToString();   
+            return requestBuilder.ToString();
+        }
+
+        private static void AddSession(Request request, Response response)
+        {
+            var sessionExists = request.Session.ContainsKey(Session.SessionCurrentDateKey);
+
+            if (!sessionExists)
+            {
+                request.Session[Session.SessionCurrentDateKey] = DateTime.Now.ToString();
+                response.Cookies.Add(Session.SessionCookieName, request.Session.Id);
+            }
         }
     }
 }

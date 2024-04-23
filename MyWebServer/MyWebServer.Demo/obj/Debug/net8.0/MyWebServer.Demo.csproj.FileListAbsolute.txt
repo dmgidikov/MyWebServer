@@ -16,3 +16,4 @@ C:\Users\Deyan\Documents\Coding\Visual Studio\C#WebBasic\MyWebServer\MyWebServer
 C:\Users\Deyan\Documents\Coding\Visual Studio\C#WebBasic\MyWebServer\MyWebServer.Demo\obj\Debug\net8.0\MyWebServer.Demo.pdb
 C:\Users\Deyan\Documents\Coding\Visual Studio\C#WebBasic\MyWebServer\MyWebServer.Demo\obj\Debug\net8.0\MyWebServer.Demo.genruntimeconfig.cache
 C:\Users\Deyan\Documents\Coding\Visual Studio\C#WebBasic\MyWebServer\MyWebServer.Demo\obj\Debug\net8.0\ref\MyWebServer.Demo.dll
+C:\Users\Deyan\Documents\Coding\Visual Studio\C#WebBasic\MyWebServer\MyWebServer.Demo\bin\Debug\net8.0\content.txt
